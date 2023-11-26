@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+
+import sys
+import os
+from git import Repo
+
+if len(sys.argv) != 1:
+    print("Usage: python justone")
+    sys.exit(1)
+
+repository_path = os.getcwd()
+
+try:
+    repo = Repo(repository_path)
+
+    current_commit = repo.head.commit
+
+    previous_commit = current_commit.parents[0]
+
+    commit_diff = repo.git.diff(previous_commit, current_commit)
+
+    print(commit_diff)
+except Exception as e:
+    print(f"An error occurred: {e}")

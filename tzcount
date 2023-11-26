@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+
+import subprocess
+import re
+
+git_log_output = subprocess.check_output(["git", "log", "2012j..2022g"], universal_newlines=True)
+
+#dictionary to count commits by time zone
+commit_counts = {}
+
+#regexp pattern to match time zone offsets
+timezone_pattern = re.compile(r"Date:\s+.*([+\-]\d{4})")
+
+#search for time zone offsets in git log output, counting commits
+for match in timezone_pattern.finditer(git_log_output):
+    timezone = match.group(1)
+    if timezone in commit_counts:
+        commit_counts[timezone] += 1
+    else:
+        commit_counts[timezone] = 1
+
+#sort dictionary by time zone offset
+sorted_commit_counts = sorted(commit_counts.items(), key=lambda x: int(x[0]))
+
+report = [f"{timezone} {count}" for timezone, count in sorted_commit_counts]
+
+for line in report:
+    print(line)

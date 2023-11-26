@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sed 's/2,4,5-t/he/g' | sed 's/2,4-d/he/g' | sed 's/he-he!/he/g' | sed "s/,/ /g" | tr -cs "0-9*""A-Za-z""/'-/" '[\n*]' | tr -d '!' | tr -d '.' | tr -d ')' | tr -d '(' | tr -d '?' | tr -d '[' | tr -d ']' | tr -d '"' | tr -d ';' | tr -d ':' |  sort -u | comm -23 - sorted.words
+
