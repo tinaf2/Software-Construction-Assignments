@@ -1,5 +1,5 @@
 # CS35L-Assignments
-CS 35L Assignments - Scripting
+Scripting assignments for UCLA CS 35L: Software Construction Lab
 
 Description of each file:
 
